@@ -39,8 +39,7 @@ async function update() {
     img.src = src;
 }
 
-// const characters = '$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,"^`\'. ';
-const characters = '$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~i!lI;:,"^`\'. ';
+const characters = '$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,"^`\'. ';
 
 async function convert() {
 	const charArr = characters.split('').reverse();
@@ -50,10 +49,9 @@ async function convert() {
     for (let i = 0; i < canvas.width*canvas.height*channels; i += channels) {
         if (i % (canvas.width * channels) == 0 && i != 0) res += '\n';
         let luminance = 0.2126*imageData.data[i] + 0.7152*imageData.data[i+1] + 0.0722*imageData.data[i+2];
-        res += `<span style="color: ${rgbToHex(imageData.data[i], imageData.data[i+1], imageData.data[i+2])}">${charArr[Math.floor(luminance / (255 / charArr.length))]}</span>`;
-        // res += charArr[Math.floor(luminance / (255 / charArr.length))];
+        res += charArr[Math.floor(luminance / (255 / charArr.length))];
     }
 
-    // asciiArt.innerText = res;
-    asciiArt.innerHTML = res;
+    asciiArt.innerText = res;
+    asciiArt.style.display = 'block';
 }
